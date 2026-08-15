@@ -6,6 +6,8 @@
 > 调研方式：read/glob/grep 实际阅读源码（vendor/、packages/、apps/、docs/、python/、native/），所有结论均落到具体文件路径与导出符号；未贴大段源码，仅精炼引用。
 > 用途：作为与 Claude Code 等主流 agent CLI 对比的素材。
 
+> **读图提示**：如果你不熟悉 Cordis、事件溯源或 capability seam，建议先看 [04 可视化深度架构指南](04-visual-architecture-guide.md) 的 DeepSeek Harness 部分，再回到本文核对源码路径与实现细节。
+
 ---
 
 ## 0. 一句话概括

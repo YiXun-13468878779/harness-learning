@@ -84,8 +84,21 @@ flowchart TB
 ## 5. 建议阅读路线
 
 1. **先读本页**（你在这里）——建立「Agent 循环 / 工具 / 日志」的直觉。
-2. **读 [01 深度对比](01-comparison.md)**——看两套系统在工具、权限、子代理、会话上的逐项差异（含多张架构图附录）。
-3. **读 [02 DeepSeek Harness 架构解读](02-dsh-architecture.md)**——深入「一切皆插件」「会话日志即真相」「沙箱链」。
-4. **读 [03 Claude Code 源码解读](03-claude-code.md)**——深入「查询循环」「权限 + hooks」「自研终端 UI」。
+2. **读 [04 可视化深度架构指南](04-visual-architecture-guide.md)**——顺着总览、一次请求、工具权限、会话恢复、子代理，把两套系统完整走一遍。
+3. **读 [01 深度对比](01-comparison.md)**——看两套系统在工具、权限、子代理、会话上的逐项差异。
+4. **读 [02 DeepSeek Harness 架构解读](02-dsh-architecture.md)**——深入「一切皆插件」「会话日志即真相」「沙箱链」。
+5. **读 [03 Claude Code 源码解读](03-claude-code.md)**——深入「查询循环」「权限 + hooks」「自研终端 UI」。
 
 > 每篇正文都保留了工程级细节（具体文件路径、导出符号），看不懂的地方可以先跳过，回到本页的概念表对照着读。
+
+## 6. 看工程文档时，把术语翻译成五个普通问题
+
+| 工程术语 | 先问自己的普通问题 |
+|---|---|
+| `queryLoop` / `ReactLoopAgent` | 谁决定“继续问模型还是结束”？ |
+| waterfall / hook | 谁能在关键节点拦截、修改或拒绝？ |
+| session log / transcript | 程序崩溃后，靠什么恢复刚才发生的事？ |
+| provider / adapter / MCP | 想换实现或接外部能力，要从哪里插进去？ |
+| scope / permission context / sandbox | 这个 Agent 到底能看到什么、能做什么？ |
+
+带着这五个问题读源码，会比按目录逐个文件阅读更容易形成完整架构图。
