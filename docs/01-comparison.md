@@ -390,3 +390,71 @@ flowchart TB
         C4 --> C5["tool_result 回喂模型"]
     end
 ```
+
+### DeepSeek Harness：Cordis 插件树（深度架构）
+
+```mermaid
+flowchart TB
+    A["profile 命名组合"] --> B["bundle 补丁层（有序叠加）"]
+    B --> C["用户 cordis.patch.yml 覆盖层"]
+    C --> D{"Cordis Context（服务仓库）"}
+    D --> E1["agent-loop 插件"]
+    D --> E2["tools 工具注册表"]
+    D --> E3["session 会话日志"]
+    D --> E4["llm 模型适配器"]
+    D --> E5["sandbox 沙箱"]
+    D --> E6["subagent 子代理"]
+    E1 -.->|"任何插件都能被 patch 覆盖"| C
+```
+
+### 会话日志：唯一事实源 → 派生一切
+
+```mermaid
+flowchart LR
+    A["事件依次 append 进日志"] --> B["SessionEvent 日志<br/>（append-only，唯一真相）"]
+    B --> C["deriveMessages()<br/>投影出模型历史"]
+    B --> D["UI 重放 / transcript"]
+    B --> E["fork / resume / telemetry"]
+    C --> F["发给模型"]
+```
+
+### 子代理：六种 provider 接缝
+
+```mermaid
+flowchart TB
+    P["父 agent 调用 subagent 工具"] --> R["SubagentRuntime（ctx.subagents）"]
+    R --> S1["spawn 同进程子代理"]
+    R --> S2["fork 继承父历史"]
+    R --> S3["ACP 子进程"]
+    R --> S4["Claude Code 子进程"]
+    R --> S5["Codex 子进程"]
+    R --> S6["dsh-sdk 子进程"]
+```
+
+### 权限决策对比
+
+```mermaid
+flowchart TB
+    subgraph D["DeepSeek Harness"]
+        direction TB
+        D1["tools/pre-execute waterfall"] --> D2{"allow / deny / ask"}
+        D2 -- ask --> D3["approval service（唯一授权 allowed-once）"]
+    end
+    subgraph C["Claude Code"]
+        direction TB
+        C1["checkPermissions 1a→3"] --> C2{"allow / ask / deny"}
+        C2 -- ask --> C3["交互层：本地按键 / hook / 分类器 / 手机端竞争"]
+    end
+```
+
+### 沙箱平台链（fail-closed）
+
+```mermaid
+flowchart LR
+    A["bash 工具调用"] --> B["SandboxProvider.confine(argv)"]
+    B --> C{"运行平台"}
+    C -- Linux --> D["bwrap → landlock"]
+    C -- macOS --> E["seatbelt"]
+    C -- Windows --> F["windows-acl"]
+    B -.fail-closed.-> G["沙箱不可用则拒绝执行"]
+```

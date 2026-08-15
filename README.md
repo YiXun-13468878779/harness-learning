@@ -45,9 +45,14 @@ flowchart TB
 
 ## 文档目录
 
+- [00 给 AI 学习者的导读](docs/00-ai-learning-guide.md) — 用大白话 + 图讲清核心概念，**建议从这里开始读**
 - [01 深度对比](docs/01-comparison.md) — 10 大维度逐项对比 + 双方独特设计决策
 - [02 DeepSeek Harness 架构解读](docs/02-dsh-architecture.md) — Cordis 插件模型、agent 循环、会话日志、能力接缝、权限沙箱、RPC
 - [03 Claude Code 源码解读](docs/03-claude-code.md) — 查询循环、工具系统、权限、hooks、终端 UI
+
+## 建议阅读路线
+
+先读 [00 导读](docs/00-ai-learning-guide.md) 建立「Agent 循环 / 工具 / 会话日志」的直觉，再按 01 → 02 → 03 逐章深入。每篇都保留工程细节（文件路径、导出符号），配合 Mermaid 架构图与流程图，学 AI 的同学也能看懂。
 
 ## 源码来源
 
