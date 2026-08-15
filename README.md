@@ -49,10 +49,11 @@ flowchart TB
 - [01 深度对比](docs/01-comparison.md) — 10 大维度逐项对比 + 双方独特设计决策
 - [02 DeepSeek Harness 架构解读](docs/02-dsh-architecture.md) — Cordis 插件模型、agent 循环、会话日志、能力接缝、权限沙箱、RPC
 - [03 Claude Code 源码解读](docs/03-claude-code.md) — 查询循环、工具系统、权限、hooks、终端 UI
+- [04 可视化深度架构指南](docs/04-visual-architecture-guide.md) — 20 张分层图与流程图，把两套系统的启动、运行、工具、权限、状态、压缩、子代理和扩展串起来
 
 ## 建议阅读路线
 
-先读 [00 导读](docs/00-ai-learning-guide.md) 建立「Agent 循环 / 工具 / 会话日志」的直觉，再按 01 → 02 → 03 逐章深入。每篇都保留工程细节（文件路径、导出符号），配合 Mermaid 架构图与流程图，学 AI 的同学也能看懂。
+如果你是 AI 应用从业者，建议按 **00 → 04 → 01** 阅读，先建立心智模型，再理解两套架构为什么不同；如果你准备改源码，再继续读 **02 → 03**。原有工程细节（文件路径、导出符号）全部保留，04 负责用 Mermaid 图把分散的实现串成完整调用链。
 
 ## 源码来源
 
